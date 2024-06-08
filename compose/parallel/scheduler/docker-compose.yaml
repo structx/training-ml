@@ -9,7 +9,7 @@ services:
     restart: 'always'
     environment:
       - DASK_CONFIG=/etc/dask/scheduler.yaml
-      - EXTRA_PIP_PACKAGES="prometheus-client"
+      - EXTRA_PIP_PACKAGES=prometheus-client scikeras
     ports:
       - 8787:8787
       - 8786:8786
@@ -17,7 +17,7 @@ services:
       - ./scheduler.yaml:/etc/dask/scheduler.yaml
     networks:
       - parallel-network
-      - montior-network
+      - monitor-network
       - public-network
     deploy:
       resources:

@@ -9,14 +9,14 @@ services:
     restart: 'always'
     environment:
       - DASK_CONFIG=/etc/dask/worker.yaml
-      - EXTRA_PIP_PACKAGES="prometheus-client"
+      - EXTRA_PIP_PACKAGES=prometheus-client tensorflow scikeras
     ports:
       - 9000:9000
     volumes:
       - ./worker.yaml:/etc/dask/worker.yaml
     networks:
       - parallel-network
-      - montior-network
+      - monitor-network
       - public-network
     command: dask-worker tcp://:8786 --resources GPU=1
 

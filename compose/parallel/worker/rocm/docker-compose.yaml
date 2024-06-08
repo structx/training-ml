@@ -14,10 +14,9 @@ services:
       - SYS_PTRACE
     group_add:
       - video
-    shm-size: '16G'
     environment:
       - DASK_CONFIG=/etc/dask/worker.yaml
-      - EXTRA_PIP_PACKAGES="prometheus-client"
+      - EXTRA_PIP_PACKAGES=prometheus-client tensorflow-rocm scikeras
     ports:
       - 9000:9000
     volumes:
@@ -27,7 +26,7 @@ services:
       - /dev/dri
     networks:
       - parallel-network
-      - montior-network
+      - monitor-network
       - public-network
     command: dask-worker tcp://:8786 --resources GPU=1
 
