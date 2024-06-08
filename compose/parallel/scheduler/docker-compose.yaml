@@ -8,6 +8,7 @@ services:
     hostname: dask.structx.io
     restart: 'always'
     environment:
+      - DASK_CONFIG=/etc/dask/scheduler.yaml
       - EXTRA_PIP_PACKAGES="prometheus-client"
     ports:
       - 8787:8787

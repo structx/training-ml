@@ -16,10 +16,12 @@ services:
       - video
     shm-size: '16G'
     environment:
+      - DASK_CONFIG=/etc/dask/worker.yaml
       - EXTRA_PIP_PACKAGES="prometheus-client"
     ports:
       - 9000:9000
     volumes:
+      - DASK_CONFIG=/etc/dask/worker.yaml
       - ./worker.yaml:/etc/dask/worker.yaml
     devices:
       - /dev/dri
@@ -27,7 +29,7 @@ services:
       - parallel-network
       - montior-network
       - public-network
-    command: dask-worker tcp://:8786
+    command: dask-worker tcp://:8786 --resources GPU=1
 
 networks:
   parallel-network:

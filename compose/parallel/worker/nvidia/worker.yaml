@@ -1,0 +1,7 @@
+
+distributed:
+  workers:
+    memory:
+      spill: 0.85
+      target: 0.75
+      terminate: 0.98
