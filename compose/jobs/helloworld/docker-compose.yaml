@@ -1,0 +1,13 @@
+---
+version: '3.7'
+
+services:
+  helloworld:
+    image: structxml/helloworld:latest
+    container_name: helloworld
+
+
+networks:
+  default:
+    name: structx-public-network
+    external: true
