@@ -1,0 +1,29 @@
+---
+version: '3.7'
+
+services:
+  scheduler:
+    image: ghcr.io/dask/dask:2024.5.2-py3.11
+    container_name: scheduler
+    hostname: dask.structx.io
+    restart: 'always'
+    ports:
+      - 9000:9000
+    volumes:
+      - ./worker.yaml:/etc/dask/worker.yaml
+    networks:
+      - parallel-network
+      - montior-network
+      - public-network
+    command: dask-worker tcp://:8786
+
+networks:
+  parallel-network:
+    name: structx-parallel-network
+    external: true
+  monitor-network:
+    name: monitor-network
+    external: true
+  public-network:
+    name: structx-public-network
+    external: true

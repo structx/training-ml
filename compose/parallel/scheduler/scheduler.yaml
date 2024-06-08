@@ -1,0 +1,4 @@
+
+distributed:
+  scheduler:
+    work-stealing: true

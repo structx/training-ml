@@ -1,0 +1,39 @@
+---
+version: '3.7'
+
+services:
+  scheduler:
+    image: ghcr.io/dask/dask:2024.5.2-py3.11
+    container_name: scheduler
+    hostname: dask.structx.io
+    restart: 'always'
+    environment:
+      - EXTRA_PIP_PACKAGES="prometheus-client"
+    ports:
+      - 8787:8787
+      - 8786:8786
+    volumes:
+      - ./scheduler.yaml:/etc/dask/scheduler.yaml
+    networks:
+      - parallel-network
+      - montior-network
+      - public-network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: dask scheduler --dashboard
+
+networks:
+  parallel-network:
+    name: structx-parallel-network
+    external: true
+  monitor-network:
+    name: monitor-network
+    external: true
+  public-network:
+    name: structx-public-network
+    external: true
